@@ -1,1 +1,31 @@
-<h1> Form </h1>
+<% if @user.errors.messages.any? %>
+  <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li> <%=msg%></li>
+      <% end %>
+  </ul>
+  <% end %>
+
+<% if false %>
+<%= form_with  url:users_path do |form| %>
+  <%=label_tag 'username', 'Username' %>
+  <%= text_field('user','username')%>
+  <%=label_tag 'email', 'E-mail' %>
+  <%= email_field 'user','email' %>
+  <%=label_tag('password', 'Password') %>
+  <%= password_field('user','password') %>
+  <%= submit_tag('Submit') %>
+
+<% end %>
+<% end %>
+
+<%= form_with model: @user do |f| %>
+  <%= f.label 'username', 'Username:' %>
+  <%= f.text_field :username, :value => 'Enter Your Username' %>
+  <%= f.label 'email', 'Email:' %>
+  <%= f.email_field :email, :value => 'example@example.com' %>
+
+  <%= f.label 'password', 'Password:' %>
+  <%= f.password_field :password %>
+  <%= f.submit 'Submit' %>
+<% end %>
